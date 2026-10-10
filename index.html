@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.datatables.net/v/dt/dt-3.0.3/datatables.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="body">
+
+
+
+        <!-- Sidebar -->
+        <section class="left">
+            <div class="sidebar">
+                <div class="logo">
+                    <div class="logo-icon">🎓</div>
+                    <h2>SMS</h2>
+                    <h1>Student Management<br> System</h1>
+
+                </div>
+
+                <div class="nav">
+
+                    <a href="#dashboard" class="active">🏡 Dashboard</a>
+
+                    <a href="#studentForm" onclick="openForm()">➕ Add Student</a>
+
+                    <a href="#studentTable">👥 All Student</a>
+
+                    <a href="#searchBox">🔍 Search Students</a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Main-Content -->
+
+        <section class="main">
+
+            <!-- Heading -->
+            <div class="head">
+                <h1>Student Management System</h1>
+                <p>Manage student records and marks easily</p>
+
+            </div>
+
+            <button class="add-btn" onclick="openForm()">
+                + Add Student
+
+            </button>
+
+
+
+            <!-- Dashboard Cards -->
+            <section class="cards" id="dashboard">
+
+                <div class="card">
+                    <div class="card-icon blue">👩‍🎓</div>
+                    <p>Total Students</p>
+                    <h2 id="totalStudents">0</h2>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-icon green">📊</div>
+                    <p>Average Percentage</p>
+                    <h2 id="averagePercentage">0%</h2>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-icon purple">🏆</div>
+                    <p>Highest Percentage</p>
+                    <h2 id="highestPercentage">0%</h2>
+
+                </div>
+
+            </section>
+
+            <!--Form-Box  -->
+
+            <section class="form" id="studentForm">
+                <div class="title">
+                    <h2 id="formTitle">Add New Student</h2>
+                    <p>Enter student's information and marks</p>
+
+                </div>
+
+                <button class="close-btn" onclick="closeForm()">x</button>
+
+
+                <form id="studentFormElement">
+
+                    <input type="hidden" id="editIndex">
+
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Roll Number</label>
+                            <input type="number" id="rollNo" placeholder="Enter Roll Number" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>Student Name</label>
+                            <input type="text" id="studentName" placeholder="Enter student Name" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>English Marks</label>
+                            <input type="number" id="english" placeholder="0-100" min="0" max="100" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>Maths Marks</label>
+                            <input type="number" id="maths" placeholder="0-100" min="0" max="100" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>Science Marks</label>
+                            <input type="number" id="science" placeholder="0-100" min="0" max="100" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>Computer Marks</label>
+                            <input type="number" id="computer" placeholder="0-100" min="0" max="100" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label>Hindi Marks</label>
+                            <input type="number" id="hindi" placeholder="0-100" min="0" max="100" required>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Result Peview -->
+
+                    <div class="result-preview">
+
+                        <div class="box">
+                            <span>Total Marks</span>
+                            <strong id="previewTotal">0 / 500</strong>
+                        </div>
+
+
+                        <div class="box">
+                            <span>Percentage</span>
+                            <strong id="previewPercentage">0%</strong>
+                        </div>
+
+
+
+                        <div class="box">
+                            <span>Grade</span>
+                            <strong id="previewGrade">-</strong>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-buttons">
+
+                        <button type="button" class="cancel-btn" onclick="closeForm()">Cancel</button>
+                        <button type="submit" class="save-btn" id="saveBtn">Save Student</button>
+
+                    </div>
+                </form>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section" id="searchBox">
+                <div class="search-title">
+                    <h2>All Students</h2>
+                    <p>Search and manage student records</p>
+
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search by name or roll number..."
+                        onkeyup="searchStudent()">
+
+                    <button onclick="searchStudent()">🔍 Search</button>
+                </div>
+
+            </section>
+
+            <!-- Student Table -->
+
+            <section class="table-wrapper" id="studentTable">
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Roll No</th>
+                            <th>Name</th>
+                            <th>English</th>
+                            <th>Maths</th>
+                            <th>Science</th>
+                            <th>Computer</th>
+                            <th>Hindi</th>
+                            <th>Total</th>
+                            <th>%</th>
+                            <th>Grade</th>
+                            <th>Action</th>
+
+
+                        </tr>
+
+
+                    </thead>
+
+                    <tbody id="studentTableBody">
+
+                    </tbody>
+                </table>
+
+            </section>
+
+        </section>
+    </div>
+
+    <script src="https://cdn.datatables.net/v/dt/dt-3.0.3/datatables.min.js"></script>
+    <script src="data.js"></script>
+</body>
+
+</html>
